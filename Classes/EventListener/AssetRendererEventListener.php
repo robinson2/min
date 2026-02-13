@@ -123,6 +123,11 @@ class AssetRendererEventListener
                 continue;
             }
 
+            // Skip compression when asset has data-min-skip attribute (e.g. from f:asset.css data-min-skip="1")
+            if (!empty($asset['attributes']['data-min-skip'])) {
+                continue;
+            }
+            
             if ($event->isInline()) {
                 $assets[$uniqueIdentifier] = [
                     'compress' => true,
